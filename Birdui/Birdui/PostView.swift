@@ -60,7 +60,8 @@ struct HeaderView: View {
       }
       Spacer()
       LikeButtonView(isLiked: $post.isLiked)
-      .padding()
+        .buttonStyle(BorderlessButtonStyle())
+        .padding()
     }
   }
 }
@@ -91,15 +92,6 @@ struct PostImageView: View {
   }
 }
 
-
-struct PostView_Previews: PreviewProvider {
-  static var previews: some View {
-    PostView(post: .constant(MediaPost(textBody: "Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]",
-      userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
-      uiImage: UIImage(named: "octopus"))))
-  }
-}
-
 struct LikeButtonView: View {
   
   @Binding var isLiked: Bool
@@ -112,3 +104,12 @@ struct LikeButtonView: View {
     }
   }
 }
+
+struct PostView_Previews: PreviewProvider {
+  static var previews: some View {
+    PostView(post: .constant(MediaPost(textBody: "Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]",
+                                       userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
+                                       uiImage: UIImage(named: "octopus"))))
+  }
+}
+
