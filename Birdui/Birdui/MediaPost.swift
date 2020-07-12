@@ -13,5 +13,6 @@ struct MediaPost: Identifiable {
   let textBody: String?
   let userName: String
   let timestamp: Date
+  var isLiked: Bool = false
   let uiImage: UIImage?
 }

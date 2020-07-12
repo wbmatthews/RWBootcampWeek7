@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct PostView: View {
-  let post: MediaPost
+  @Binding var post: MediaPost
   @Environment(\.verticalSizeClass) var verticalSizeClass
   let maxSize: CGFloat = 200
   
@@ -17,7 +17,7 @@ struct PostView: View {
     ZStack {
       if verticalSizeClass == .compact {
         HStack(alignment: .top) {
-          TextPostView(post: post)
+          TextPostView(post: $post)
           Spacer()
           if post.uiImage != nil {
             PostImageView(image: post.uiImage!, width: maxSize, height: maxSize)
@@ -25,7 +25,7 @@ struct PostView: View {
         }
       } else {
         VStack(alignment: .leading) {
-          TextPostView(post: post)
+          TextPostView(post: $post)
           if post.uiImage != nil {
             PostImageView(image: post.uiImage!, width: .infinity, height: maxSize)
           }
@@ -47,7 +47,7 @@ struct LogoView: View {
 
 struct HeaderView: View {
   
-  let post: MediaPost
+  @Binding var post: MediaPost
   
   var body: some View {
     HStack(alignment: .top) {
@@ -58,17 +58,20 @@ struct HeaderView: View {
         Text("\(post.timestamp, formatter: PostViewModel.dateFormatter)")
           .foregroundColor(.secondary)
       }
+      Spacer()
+      LikeButtonView(isLiked: $post.isLiked)
+      .padding()
     }
   }
 }
 
 struct TextPostView: View {
   
-  var post: MediaPost
+  @Binding var post: MediaPost
   
   var body: some View {
     VStack(alignment: .leading) {
-      HeaderView(post: post)
+      HeaderView(post: $post)
       Text(post.textBody!).lineLimit(nil)
     }
   }
@@ -91,8 +94,21 @@ struct PostImageView: View {
 
 struct PostView_Previews: PreviewProvider {
   static var previews: some View {
-    PostView(post: MediaPost(textBody: "Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]",
+    PostView(post: .constant(MediaPost(textBody: "Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]Went to the Aquarium today :]",
       userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
-      uiImage: UIImage(named: "octopus")))
+      uiImage: UIImage(named: "octopus"))))
+  }
+}
+
+struct LikeButtonView: View {
+  
+  @Binding var isLiked: Bool
+  
+  var body: some View {
+    Button(action: {
+      self.isLiked.toggle()
+    }) {
+      Image(systemName: self.isLiked ? "hand.thumbsup.fill" : "hand.thumbsup")
+    }
   }
 }

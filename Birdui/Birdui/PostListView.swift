@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PostListView: View {
   
-  var postViewModel: PostViewModel
+  @ObservedObject var postViewModel: PostViewModel
   
   var body: some View {
     VStack {
@@ -24,8 +24,8 @@ struct PostListView: View {
           .font(.largeTitle)
         
       }
-      List(postViewModel.posts) { post in
-        PostView(post: post)
+      List(postViewModel.posts.indices) { postIndex in
+        PostView(post: self.$postViewModel.posts[postIndex])
       }
     }
   }
