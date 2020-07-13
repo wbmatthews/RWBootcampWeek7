@@ -10,7 +10,6 @@ import SwiftUI
 
 class PostViewModel: ObservableObject {
   @Published var posts: [MediaPost] = []
-  static let demoPosts = PostViewModel()
   
   init() {
     let imagePost1 = MediaPost(textBody: "I love debugging software!", userName: "Jay", timestamp: Date(timeIntervalSinceNow: -123456), uiImage: UIImage(named: "chop"))
