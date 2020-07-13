@@ -26,3 +26,9 @@ class PostViewModel: ObservableObject {
       posts = posts.sorted(by: { $0.timestamp > $1.timestamp })
   }
 }
+
+struct PostViewModel_Previews: PreviewProvider {
+    static var previews: some View {
+        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
+    }
+}
