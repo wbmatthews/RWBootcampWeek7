@@ -10,6 +10,7 @@ import SwiftUI
 
 class PostViewModel: ObservableObject {
   @Published var posts: [MediaPost] = []
+  static let demoPosts = PostViewModel()
   
   init() {
     let imagePost1 = MediaPost(textBody: "I love debugging software!", userName: "Jay", timestamp: Date(timeIntervalSinceNow: -123456), uiImage: UIImage(named: "chop"))
@@ -24,10 +25,4 @@ class PostViewModel: ObservableObject {
       posts.append(post)
       posts = posts.sorted(by: { $0.timestamp > $1.timestamp })
   }
-}
-
-struct PostViewModel_Previews: PreviewProvider {
-    static var previews: some View {
-        /*@START_MENU_TOKEN@*/Text("Hello, World!")/*@END_MENU_TOKEN@*/
-    }
 }

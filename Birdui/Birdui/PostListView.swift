@@ -9,15 +9,30 @@
 import SwiftUI
 
 struct PostListView: View {
+  
+  var postViewModel: PostViewModel
+  
   var body: some View {
-    // TODO: This should look exactly like the Birdie table view,
-    // but with only one button.
-    Text("Layout header, new-post button, List of posts")
+    VStack {
+      ZStack {
+        HStack {
+          LogoView()
+            .padding(.horizontal, 10)
+          Spacer()
+        }
+        Text("Home")
+          .font(.largeTitle)
+        
+      }
+      List(postViewModel.posts) { post in
+        PostView(post: post)
+      }
+    }
   }
 }
 
 struct PostListView_Previews: PreviewProvider {
   static var previews: some View {
-    PostListView()
+    PostListView(postViewModel: PostViewModel.demoPosts)
   }
 }
