@@ -12,6 +12,12 @@ class PostViewModel: ObservableObject {
   @Published var posts: [MediaPost] = []
   static let demoPosts = PostViewModel()
   
+  static let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "MMM dd h:mm a"
+    return formatter
+  }()
+  
   init() {
     let imagePost1 = MediaPost(textBody: "I love debugging software!", userName: "Jay", timestamp: Date(timeIntervalSinceNow: -123456), uiImage: UIImage(named: "chop"))
     let imagePost2 = MediaPost(textBody: "Went to the Aquarium today :]", userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876), uiImage: UIImage(named:  "octopus"))
@@ -25,4 +31,5 @@ class PostViewModel: ObservableObject {
       posts.append(post)
       posts = posts.sorted(by: { $0.timestamp > $1.timestamp })
   }
+  
 }

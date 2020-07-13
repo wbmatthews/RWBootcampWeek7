@@ -13,7 +13,6 @@ struct PostListView: View {
   @ObservedObject var postViewModel: PostViewModel
   @State var showingNewPostView = false
   
-  
   var body: some View {
     VStack {
       ZStack {
@@ -31,8 +30,8 @@ struct PostListView: View {
       }.sheet(isPresented: $showingNewPostView) {
         NewPostView(postHandler: self.postViewModel)
       }
-      List(postViewModel.posts) { post in
-        PostView(post: post)
+      List(postViewModel.posts.indices) { postIndex in
+        PostView(post: self.$postViewModel.posts[postIndex])
       }
     }
   }
