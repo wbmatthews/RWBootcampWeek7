@@ -52,6 +52,7 @@ struct NewPostView: View {
     .sheet(isPresented: $showImagePicker) {
       // TODO: Show ImagePicker
       Text("Replace with code to show ImagePicker")
+        
     }
   }
 }
