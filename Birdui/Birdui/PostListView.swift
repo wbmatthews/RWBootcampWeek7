@@ -10,7 +10,9 @@ import SwiftUI
 
 struct PostListView: View {
   
-  var postViewModel: PostViewModel
+  @ObservedObject var postViewModel: PostViewModel
+  @State var showingNewPostView = false
+  
   
   var body: some View {
     VStack {
@@ -23,6 +25,11 @@ struct PostListView: View {
         Text("Home")
           .font(.largeTitle)
         
+      }
+      Button("Create New Post") {
+        self.showingNewPostView.toggle()
+      }.sheet(isPresented: $showingNewPostView) {
+        NewPostView(postHandler: self.postViewModel)
       }
       List(postViewModel.posts) { post in
         PostView(post: post)
